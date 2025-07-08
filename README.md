@@ -1,29 +1,30 @@
-youtube-shorts-generator/
-├── src/
-│   ├── main/
-│   │   ├── java/com/example/shorts/
-│   │   │   ├── config/                <-- API keys, OAuth, Beans
-│   │   │   ├── controller/            <-- Optional REST API
-│   │   │   ├── dto/                   <-- DTOs for OpenAI/YouTube
-│   │   │   ├── model/                 <-- JPA Entities (e.g., QuoteVideo)
-│   │   │   ├── repository/            <-- JPA Repositories
-│   │   │   ├── scheduler/             <-- Scheduled job class
-│   │   │   ├── service/
-│   │   │   │   ├── QuoteService.java          <-- Calls OpenAI GPT
-│   │   │   │   ├── VideoComposerService.java  <-- Builds video using FFmpeg
-│   │   │   │   ├── YouTubeUploaderService.java<-- Uploads video
-│   │   │   │   ├── FileService.java           <-- Local file mgmt
-│   │   │   │   └── TextOverlayService.java    <-- Quote to drawtext config
-│   │   │   └── ShortsGeneratorApplication.java <-- Main app
-│   │   └── resources/
-│   │       ├── application.yml
-│   │       ├── static/                <-- Optional static assets
-│   │       └── assets/
-│   │           ├── backgrounds/       <-- Video/image backgrounds
-│   │           ├── music/             <-- MP3 files
-│   │           └── fonts/             <-- .ttf font for drawtext
-│   └── test/java/com/example/shorts/
-│       └── service/                   <-- Unit tests
-├── Dockerfile                        <-- For containerization
-├── pom.xml                           <-- Maven dependencies
-└── README.md
+git workflow :
+
+🔨 Job 1: build
+Step	What It Does
+✅ Checkout code	Clones your repo in GitHub runner
+☕ Set up Java	Installs JDK 17
+⚙️ Build with Maven	Runs ./mvnw clean verify to compile + test
+🔒 OWASP Check	Scans dependencies for known vulnerabilities
+📦 Upload JAR	Saves the built .jar file to be reused later
+
+This job just builds and prepares the application.
+
+🚀 Job 2: deploy (Depends on build)
+Step	What It Does
+🔽 Downloads JAR	Gets the .jar from the build job
+📦 Sets up Terraform	Installs Terraform CLI
+🧱 Terraform Init	Prepares Terraform (reads backend, provider, etc.)
+⚙️ Terraform Apply	Provisions AWS resources automatically
+
+Terraform :
+
+Terraform is an open-source Infrastructure as Code (IaC) tool created by HashiCorp.
+
+Instead of creating AWS resources manually (via the AWS Console), you declare your infrastructure in code (written in HCL – HashiCorp Configuration Language).
+
+🚀 Why use Terraform?
+✅ Version-controlled infrastructure (just like your code)
+✅ Repeatable (create dev/test/prod environments consistently)
+✅ Auditable (you can see what changed and why)
+✅ Automated (runs inside CI/CD like GitHub Actions)
