@@ -1,3 +1,8 @@
+
+provider "aws" {
+  region = "ap-south-1"  # or your region
+}
+
 resource "aws_s3_bucket" "logs_bucket" {
   bucket = var.logs_bucket_name
 
@@ -9,7 +14,8 @@ resource "aws_s3_bucket" "logs_bucket" {
 resource "aws_instance" "my_ec2_instance" {
   ami                    = var.ami_id
   instance_type          = "t2.micro"
-  subnet_id              = var.subnet_id
+  # subnet_id              = var.subnet_id
+  subnet_id = data.aws_subnet.default.id
   vpc_security_group_ids = [aws_security_group.ec2_sg.id]
 
   # Uncomment below if you want SSH access
@@ -20,20 +26,13 @@ resource "aws_instance" "my_ec2_instance" {
   }
 }
 
-
-# resource "aws_instance" "my_ec2_instance" {
-#   ami           = "ami-0c55b159cbfafe1f0"
-#   instance_type = "t2.micro"
-#
-#   tags = {
-#     Name = "my-terraform-ec2"
-#   }
-# }
-
+data "aws_vpc" "default" {
+  default = true
+}
 resource "aws_security_group" "ec2_sg" {
   name        = "ec2-sg"
   description = "Allow SSH and HTTP"
-  vpc_id      = var.vpc_id
+  vpc_id      = data.aws_vpc.default.id
 
   ingress {
     description = "SSH"
@@ -62,51 +61,23 @@ resource "aws_security_group" "ec2_sg" {
     Name = "ec2-sg"
   }
 }
+data "aws_subnet" "default" {
+  filter {
+    name   = "vpc-id"
+    values = [data.aws_vpc.default.id]
+  }
 
+  filter {
+    name   = "default-for-az"
+    values = ["true"]
+  }
 
+  # Optional: scope to a specific AZ
+  # filter {
+  #   name   = "availability-zone"
+  #   values = ["ap-south-1a"]
+  # }
+}
 
-# resource "aws_iam_role" "ec2_role" {
-#   name = "ec2-springboot-role"
-#
-#   assume_role_policy = jsonencode({
-#     Version = "2012-10-17"
-#     Statement = [{
-#       Action    = "sts:AssumeRole"
-#       Effect    = "Allow"
-#       Principal = {
-#         Service = "ec2.amazonaws.com"
-#       }
-#     }]
-#   })
-# }
-#
-#
-#
-#
-# resource "aws_iam_role_policy" "ec2_policy" {
-#   name = "ec2-policy"
-#   role = aws_iam_role.ec2_role.id
-#
-#   policy = jsonencode({
-#     Version = "2012-10-17"
-#     Statement = [
-#       {
-#         Effect   = "Allow"
-#         Action   = [
-#           "s3:CreateBucket",
-#           "s3:PutObject",
-#           "s3:GetObject",
-#           "s3:ListBucket",
-#           "s3:DeleteObject",
-#           "s3:DeleteBucket"
-#         ]
-#         Resource = [
-#           aws_s3_bucket.logs_bucket.arn,
-#           "${aws_s3_bucket.logs_bucket.arn}/*"
-#         ]
-#       }
-#     ]
-#   })
-# }
 
 
