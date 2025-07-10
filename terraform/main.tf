@@ -16,7 +16,7 @@ resource "aws_instance" "my_ec2_instance" {
   instance_type          = "t2.micro"
   # subnet_id              = var.subnet_id
   subnet_id = data.aws_subnet.default.id
-  vpc_security_group_ids = [aws_security_group.ec2_sg.id]
+  vpc_security_group_ids = [aws_security_group.ec2_sg-custom]
 
   # Uncomment below if you want SSH access
   # key_name = var.key_pair_name
