@@ -1,9 +1,5 @@
 # ONLY DEFN HERE , REAL VALUES FO TO TFVARS
 
-variable "aws_region" {
-  default = "ap-south-1"
-}
-
 variable "logs_bucket_name" {
   description = "S3 bucket for logs or JAR uploads"
 }
