@@ -25,12 +25,15 @@ resource "aws_instance" "my_ec2_instance" {
     Name = "my-terraform-ec2"
   }
 }
+resource "random_id" "sg_suffix" {
+  byte_length = 4
+}
 
 data "aws_vpc" "default" {
   default = true
 }
 resource "aws_security_group" "ec2_sg_custom" {
-  name        = "ec2-sg_custom-alt"
+  name        = "ec2-sg-${random_id.sg_suffix.hex}"
   description = "Allow SSH and HTTP"
   vpc_id      = data.aws_vpc.default.id
 
