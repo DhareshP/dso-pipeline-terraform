@@ -29,8 +29,8 @@ resource "aws_instance" "my_ec2_instance" {
 data "aws_vpc" "default" {
   default = true
 }
-resource "aws_security_group" "ec2_sg" {
-  name        = "ec2-sg"
+resource "aws_security_group" "ec2_sg-custom" {
+  name        = "ec2-sg-custom"
   description = "Allow SSH and HTTP"
   vpc_id      = data.aws_vpc.default.id
 
