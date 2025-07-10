@@ -16,10 +16,6 @@ variable "instance_type" {
   default = "t2.micro"
 }
 
-variable "key_pair_name" {
-  description = "EC2 Key pair name for SSH access"
-}
-
 variable "subnet_id" {
   description = "Subnet where EC2 will be launched"
 }
