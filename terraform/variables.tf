@@ -16,10 +16,10 @@ variable "instance_type" {
   default = "t2.micro"
 }
 
-variable "subnet_id" {
-  description = "Subnet where EC2 will be launched"
-}
-
-variable "vpc_id" {
-  description = "VPC where resources will live"
-}
+# variable "subnet_id" {
+#   description = "Subnet where EC2 will be launched"
+# }
+#
+# variable "vpc_id" {
+#   description = "VPC where resources will live"
+# }
