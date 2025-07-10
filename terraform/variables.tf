@@ -1,3 +1,5 @@
+# ONLY DEFN HERE , REAL VALUES FO TO TFVARS
+
 variable "aws_region" {
   default = "ap-south-1"
 }
