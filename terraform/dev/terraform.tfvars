@@ -1,0 +1,6 @@
+logs_bucket_name = "my-app-logs-dev"
+vpc_id           = "vpc-aaa111"
+subnet_id        = "subnet-aaa111"
+ami_id           = "ami-0abc1234dev"
+key_pair_name    = "dev-key"
+

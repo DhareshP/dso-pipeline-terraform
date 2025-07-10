@@ -1,0 +1,5 @@
+logs_bucket_name = "my-app-logs-prod"
+vpc_id           = "vpc-bbb222"
+subnet_id        = "subnet-bbb222"
+ami_id           = "ami-0abc1234prod"
+key_pair_name    = "prod-key"
