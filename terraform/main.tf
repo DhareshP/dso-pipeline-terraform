@@ -30,7 +30,7 @@ data "aws_vpc" "default" {
   default = true
 }
 resource "aws_security_group" "ec2_sg_custom" {
-  name        = "ec2-sg_custom"
+  name        = "ec2-sg_custom-alt"
   description = "Allow SSH and HTTP"
   vpc_id      = data.aws_vpc.default.id
 
