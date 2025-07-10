@@ -68,16 +68,11 @@ data "aws_subnet" "default" {
   }
 
   filter {
-    name   = "default-for-az"
-    values = ["true"]
+    name   = "availability-zone"
+    values = ["ap-south-1a"] # ← Replace with an AZ that exists in your AWS account
   }
-
-  # Optional: scope to a specific AZ
-  # filter {
-  #   name   = "availability-zone"
-  #   values = ["ap-south-1a"]
-  # }
 }
+
 
 
 
