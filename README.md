@@ -190,6 +190,6 @@ Outputs will be shown in the GitHub Actions logs.
 
 ## 12. Automation Benefits
 
-This pipeline reduces manual deployment efforts, increases consistency, and integrates security early. Developers can focus on building features, knowing deployments are handled securely and efficiently.
+This pipeline reduces manual deployment efforts, increases consistency, and integrates security early. Developers can focus on building features, knowing deployments are handled securely and efficiently....
 
 ---
