@@ -1,0 +1,19 @@
+1. npm install
+2. to run UI - npm run dev
+3. to run py backend -
+                    cd backend
+                    py -m venv .venv
+                    .\.venv\Scripts\Activate.ps1
+                    pip install -r requirements.txt
+                    python main.py
+
+                    OR
+ RUN THIS for backed 1. --- cd C:\Users\Dharesh\OneDrive\Desktop\roster-app-with-ui-main\roster-app-with-ui-main\backend\.venv\Scripts\Activate.ps1;
+ 2.  python main.py 
+
+
+ -> run UI - locally - npm run dev
+ -> run main.py - locally - http://127.0.0.1:8000/
+ -> DB - supabase on server
+
+        UI -> calls DB to get or post data -> backend calls through DB and gets data to create roster 
